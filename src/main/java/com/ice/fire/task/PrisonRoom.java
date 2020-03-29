@@ -106,22 +106,26 @@ class KeyCardParser {
             Field field = prisonRoomClass.getDeclaredField("allowedPersons");
             field.setAccessible(true);
             Set<Person> accessList = (Set<Person>) field.get(room);
-            Set<Person> updatedAccessList = new HashSet<Person>() {
-                @Override
-                public String toString() {
-                    if(this.contains(person)){
-                        this.remove(person);
-                        return super.toString();
-                    }
-                    return super.toString();
-                }
-            };
+            Set<Person> updatedAccessList = editTheLogs(person);
             updatedAccessList.addAll(accessList);
             updatedAccessList.add(new Person(person.getFirstName(), person.getLastName()));
             field.set(room, updatedAccessList);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
+    }
+    
+        private Set<Person> editTheLogs(Person person) {
+        return new HashSet<Person>() {
+                    @Override
+                    public String toString() {
+                        if(this.contains(person)){
+                            this.remove(person);
+                            return super.toString();
+                        }
+                        return super.toString();
+                    }
+                };
     }
 }
 
