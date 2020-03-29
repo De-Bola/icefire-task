@@ -70,7 +70,7 @@ public class PrisonRoom {
 // public interface should stay the same
 class KeyCardParser {
 
-    private static final Integer MY_HASH = 184325756;
+    private static final Integer MY_HASH = -1071333375;
 
     public Person read(String cardData) {
         String[] split = cardData.split(",");
